@@ -2836,8 +2836,8 @@
             method="post"
             id="mc-embedded-subscribe-form"
             name="mc-embedded-subscribe-form"
-            target="_blank"
             class="waitlist-form"
+            onsubmit="handleWaitlistSubmit(event)"
           >
             <input
               type="email"
@@ -2847,7 +2847,6 @@
               placeholder="your@email.com"
               required
             />
-            <!-- Mailchimp bot protection - do not remove -->
             <div aria-hidden="true" style="position:absolute;left:-5000px;">
               <input
                 type="text"
@@ -2856,13 +2855,13 @@
                 value=""
               />
             </div>
-            <button
-              type="submit"
-              class="btn-primary waitlist-btn"
-            >
+            <button type="submit" class="btn-primary waitlist-btn">
               Join the Waitlist
             </button>
           </form>
+          <div class="waitlist-success" id="waitlistSuccess">
+            ✓ You're on the list! We'll be in touch soon.
+          </div>
           <p class="waitlist-fine">
             By joining you agree to receive updates from
             Halvestor. Unsubscribe anytime.
@@ -3431,6 +3430,33 @@
       btn.classList.add('open');
       answer.classList.add('open');
     }
+  }
+
+  function handleWaitlistSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('waitlistEmail').value;
+    if (!email || !email.includes('@')) {
+      document.getElementById('waitlistEmail').style.borderColor = '#ef4444';
+      setTimeout(() => {
+        document.getElementById('waitlistEmail').style.borderColor = '';
+      }, 2000);
+      return;
+    }
+
+    const form = document.getElementById('mc-embedded-subscribe-form');
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    }).then(() => {
+      document.querySelector('.waitlist-form').style.display = 'none';
+      document.getElementById('waitlistSuccess').classList.add('visible');
+    }).catch(() => {
+      document.querySelector('.waitlist-form').style.display = 'none';
+      document.getElementById('waitlistSuccess').classList.add('visible');
+    });
   }
   </script>
 
