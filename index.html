@@ -2830,20 +2830,38 @@
           </div>
           <h3>Reserve your spot</h3>
           <p>No spam. No credit card. Just early access.</p>
-          <div class="waitlist-form">
+          <form
+            action="https://app.us9.list-manage.com/subscribe/post?u=66648363874f53864e876d475&amp;id=b18d11845e&amp;f_id=0061c9e0f0"
+            method="post"
+            id="mc-embedded-subscribe-form"
+            name="mc-embedded-subscribe-form"
+            target="_blank"
+            class="waitlist-form"
+          >
             <input
               type="email"
+              name="EMAIL"
               id="waitlistEmail"
               class="waitlist-input"
               placeholder="your@email.com"
+              required
             />
-            <button class="btn-primary waitlist-btn" onclick="handleWaitlist()">
+            <!-- Mailchimp bot protection - do not remove -->
+            <div aria-hidden="true" style="position:absolute;left:-5000px;">
+              <input
+                type="text"
+                name="b_66648363874f53864e876d475_b18d11845e"
+                tabindex="-1"
+                value=""
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn-primary waitlist-btn"
+            >
               Join the Waitlist
             </button>
-          </div>
-          <div class="waitlist-success" id="waitlistSuccess">
-            ✓ You're on the list! We'll be in touch soon.
-          </div>
+          </form>
           <p class="waitlist-fine">
             By joining you agree to receive updates from
             Halvestor. Unsubscribe anytime.
@@ -3393,21 +3411,6 @@
       track.innerHTML = cards + cards;
     });
 
-  function handleWaitlist() {
-    const email = document.getElementById('waitlistEmail').value;
-    const success = document.getElementById('waitlistSuccess');
-    if (email && email.includes('@')) {
-      success.classList.add('visible');
-      document.getElementById('waitlistEmail').value = '';
-      document.querySelector('.waitlist-form').style.display = 'none';
-    } else {
-      document.getElementById('waitlistEmail').style.borderColor = '#ef4444';
-      setTimeout(() => {
-        document.getElementById('waitlistEmail').style.borderColor = '';
-      }, 2000);
-    }
-  }
-
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
     const answer = item.querySelector('.faq-answer');
@@ -3428,6 +3431,20 @@
       answer.classList.add('open');
     }
   }
+  </script>
+
+  <script
+    type="text/javascript"
+    src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js">
+  </script>
+  <script type="text/javascript">
+  (function($) {
+    window.fnames = new Array();
+    window.ftypes = new Array();
+    fnames[0]='EMAIL';
+    ftypes[0]='email';
+  }(jQuery));
+  var $mcj = jQuery.noConflict(true);
   </script>
 
 </body>
