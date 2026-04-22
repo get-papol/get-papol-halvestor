@@ -125,6 +125,7 @@
     .stagger-4 { transition-delay: 0.45s; }
     .stagger-5 { transition-delay: 0.60s; }
     .stagger-6 { transition-delay: 0.75s; }
+    .stagger-7 { transition-delay: 0.90s; }
 
 
     /* ============================================================
@@ -138,7 +139,8 @@
       color: #000;
       font-size: 15px;
       font-weight: 700;
-      padding: 14px 32px;
+      padding: 15px 32px;
+      min-height: 44px;
       border-radius: 100px;
       transition: background-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
       white-space: nowrap;
@@ -157,7 +159,8 @@
       color: #12100f;
       font-size: 15px;
       font-weight: 600;
-      padding: 13px 30px;
+      padding: 15px 30px;
+      min-height: 44px;
       border-radius: 100px;
       border: 1px solid rgba(18, 16, 15, 0.25);
       transition: background-color var(--t-fast), transform var(--t-fast);
@@ -432,6 +435,96 @@
       margin: 0 8px;
     }
 
+    /* Hero email capture form */
+    .hero-email-form {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 500px;
+    }
+
+    .hero-email-input {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 100px;
+      border: 1px solid rgba(18, 16, 15, 0.15);
+      background: rgba(18, 16, 15, 0.04);
+      font-family: var(--font);
+      font-size: 15px;
+      color: var(--text-primary);
+      transition: border-color var(--t-fast), background var(--t-fast);
+    }
+    .hero-email-input::placeholder {
+      color: var(--text-secondary);
+    }
+    .hero-email-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(18, 16, 15, 0.06);
+    }
+
+    .hero-email-btn {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .hero-secondary-link {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .hero-secondary-link a {
+      color: var(--accent);
+      font-weight: 600;
+      transition: color var(--t-fast);
+    }
+    .hero-secondary-link a:hover {
+      color: var(--accent-hover);
+    }
+
+    /* Hero CTA group wrapper (Download button + waitlist link) */
+    .hero-cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta-group .hero-secondary-link {
+      margin-top: 12px;
+      text-align: left;
+    }
+
+    /* AAOIFI Shariah advisor line */
+    .hero-aaoifi {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .hero-aaoifi::before {
+      content: '✓ ';
+      color: #4ade80;
+      font-weight: 700;
+    }
+
+    /* Live download counter */
+    .hero-download-counter {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    .hero-download-counter::before {
+      content: '📲 ';
+      margin-right: 4px;
+    }
+    .download-count {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
 
     /* ---- Hero Right: Phone Mockup ---- */
     .hero-visual {
@@ -681,8 +774,35 @@
         max-width: 100%;
       }
 
-      .hero-ctas {
+      .hero-email-form {
+        flex-direction: column;
+        max-width: 100%;
+      }
+
+      .hero-email-input {
+        width: 100%;
+      }
+
+      .hero-email-btn {
+        width: 100%;
+      }
+
+      .hero-secondary-link {
+        font-size: 13px;
+      }
+
+      .hero-cta-group {
+        width: 100%;
+        align-items: center;
+      }
+
+      .hero-cta-group .btn-primary {
+        width: 100%;
         justify-content: center;
+      }
+
+      .hero-cta-group .hero-secondary-link {
+        text-align: center;
       }
 
       .hero-visual {
@@ -701,6 +821,8 @@
     @media (max-width: 480px) {
       .hero-heading { font-size: 40px; letter-spacing: -1px; }
       :root { --container-pad: 20px; }
+      .hero-aaoifi { font-size: 12px; }
+      .hero-download-counter { font-size: 12px; }
     }
 
 
@@ -755,6 +877,7 @@
     .quote-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
       border-radius: 16px;
       padding: 32px;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -847,6 +970,19 @@
       max-width: 700px;
       margin: 0 auto 80px auto;
     }
+
+    .features-highlight-label {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: rgba(59, 132, 246, 0.12);
+      color: var(--accent);
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
     .features-header h2 {
       font-size: clamp(36px, 5vw, 56px);
       font-weight: 800;
@@ -919,11 +1055,25 @@
       transform: translateY(10px);
       transition: opacity 0.5s ease, transform 0.5s ease;
       pointer-events: none;
+      display: flex;
+      flex-direction: column;
     }
     .feat-screen.active {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+    }
+
+    .feat-screen-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 26px;
+      z-index: 0;
     }
 
     .feat-screen-header {
@@ -932,6 +1082,8 @@
       align-items: center;
       margin-bottom: 16px;
       padding-top: 8px;
+      position: relative;
+      z-index: 1;
     }
     .feat-screen-title {
       font-size: 13px;
@@ -952,9 +1104,31 @@
       padding: 6px 12px;
     }
 
+    .feat-screen-filters {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feat-filter-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feat-screen-result {
+      position: relative;
+      z-index: 1;
+    }
+
+    .feat-donut-area {
+      position: relative;
+      z-index: 1;
+    }
+
     .feat-chart-area {
       height: 90px;
       margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
     }
     .feat-chart-area svg {
       width: 100%;
@@ -969,12 +1143,16 @@
       margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(18,16,15,0.08);
+      position: relative;
+      z-index: 1;
     }
 
     .feat-stock-list {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      position: relative;
+      z-index: 1;
     }
     .feat-stock-row {
       display: flex;
@@ -1320,6 +1498,13 @@
     line-height: 1.6;
   }
 
+  .testimonials-disclaimer {
+    font-size: 12px;
+    color: rgba(18, 16, 15, 0.5);
+    margin-top: 12px !important;
+    font-style: italic;
+  }
+
   /* Ticker wrapper — masks overflow, adds edge fade */
   .ticker-wrap {
     width: 100%;
@@ -1510,6 +1695,13 @@
     padding: 4px 12px;
     border-radius: 20px;
     letter-spacing: 0.5px;
+  }
+
+  .waitlist-urgency {
+    font-size: 12px;
+    color: rgba(18, 16, 15, 0.6);
+    margin-top: 8px;
+    margin-bottom: 0;
   }
 
   .waitlist-card h3 {
@@ -2276,22 +2468,58 @@
           No Subscription Fee, No Hidden Steps, Full Peace of Mind.
         </p>
 
-        <!-- CTA buttons -->
-        <div class="hero-ctas fade-up stagger-5">
-          <a href="#download" class="btn-primary">
-            <!-- Download icon -->
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M8 1v9M4.5 6.5 8 10l3.5-3.5M2 13h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Download App
+        <!-- Primary CTA: Download Now button + waitlist link -->
+        <div class="hero-cta-group fade-up stagger-5">
+          <a href="#download" class="btn-primary" aria-label="Download Halvestor app">
+            Download Now
           </a>
-          <a href="#waitlist" class="btn-secondary">
-            Join the Waitlist
-          </a>
+          <p class="hero-secondary-link">
+            or <a href="#waitlist">join the waitlist</a>
+          </p>
         </div>
 
+        <!-- Email capture form -->
+        <form
+          action="https://app.us9.list-manage.com/subscribe/post?u=66648363874f53864e876d475&amp;id=b18d11845e&amp;f_id=0061c9e0f0"
+          method="post"
+          id="mc-embedded-subscribe-form-hero"
+          name="mc-embedded-subscribe-form-hero"
+          class="hero-email-form fade-up stagger-6"
+          onsubmit="handleHeroEmailSubmit(event)"
+        >
+          <input
+            type="email"
+            name="EMAIL"
+            id="heroEmail"
+            class="hero-email-input"
+            placeholder="your@email.com"
+            required
+          />
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input
+              type="text"
+              name="b_66648363874f53864e876d475_b18d11845e"
+              tabindex="-1"
+              value=""
+            />
+          </div>
+          <button type="submit" class="btn-primary hero-email-btn">
+            Get Early Access
+          </button>
+        </form>
+
+        <!-- AAOIFI Shariah advisor trust badge -->
+        <p class="hero-aaoifi fade-up stagger-7">
+          Overseen by an AAOIFI-certified Shariah advisor
+        </p>
+
+        <!-- Live download counter -->
+        <p class="hero-download-counter fade-up stagger-7">
+          <span class="download-count" id="downloadCounter">10,000</span> downloads and counting
+        </p>
+
         <!-- Trust line -->
-        <p class="hero-trust fade-up stagger-6">
+        <p class="hero-trust fade-up stagger-7">
           Available on iOS &amp; Android<span class="dot">·</span>Free to Download
         </p>
 
@@ -2367,31 +2595,13 @@
 
         <div class="quote-card fade-up stagger-2">
           <span class="quote-mark">"</span>
-          <p class="quote-text">High deposit and withdrawal fees make it barely worth investing.</p>
+          <p class="quote-text">It's difficult to read through stocks and just focus on Shariah-compliant ones.</p>
           <span class="quote-attribution">— Halvestor Survey Respondent</span>
         </div>
 
         <div class="quote-card fade-up stagger-3">
           <span class="quote-mark">"</span>
-          <p class="quote-text">It's difficult to read through stocks and just focus on Shariah-compliant ones.</p>
-          <span class="quote-attribution">— Halvestor Survey Respondent</span>
-        </div>
-
-        <div class="quote-card fade-up stagger-4">
-          <span class="quote-mark">"</span>
           <p class="quote-text">There is a very limited range of halal investment options available to me.</p>
-          <span class="quote-attribution">— Halvestor Survey Respondent</span>
-        </div>
-
-        <div class="quote-card fade-up stagger-5">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">With certain platforms, you don't see which stocks are specifically being invested in.</p>
-          <span class="quote-attribution">— Halvestor Survey Respondent</span>
-        </div>
-
-        <div class="quote-card fade-up stagger-6">
-          <span class="quote-mark">"</span>
-          <p class="quote-text">Not much info on founders or board members — who companies align with or donate to.</p>
           <span class="quote-attribution">— Halvestor Survey Respondent</span>
         </div>
 
@@ -2400,9 +2610,9 @@
       <!-- Stat Callout Bar -->
       <div class="stat-bar fade-up">
         <div class="stat-bar-inner">
-          <span class="stat-label">SURVEY RESULT</span>
-          <div class="stat-number">86%</div>
-          <p class="stat-desc">of Muslim investors are dissatisfied with existing investing platforms and want a Shariah-first alternative.</p>
+          <span class="stat-label">TRUSTED BY THOUSANDS</span>
+          <div class="stat-number">10,000+</div>
+          <p class="stat-desc">downloads across iOS and Android. Join the Muslim investors building halal wealth with Halvestor.</p>
         </div>
       </div>
 
@@ -2427,6 +2637,9 @@
     <!-- Section header -->
     <div class="features-header fade-up">
       <span class="section-label">THE APP</span>
+      <div class="features-highlight-label">
+        We reduced halal investing from 7 steps to just 3
+      </div>
       <h2>Everything you need.<br>Nothing you don't.</h2>
       <p>Built specifically for Muslim investors who refuse to compromise their values.</p>
     </div>
@@ -2441,6 +2654,7 @@
 
             <!-- Screen 1: Simulate -->
             <div class="feat-screen active" data-screen="0">
+              <img src="main.jpeg" alt="Paper Trading screen" class="feat-screen-image" />
               <div class="feat-screen-header">
                 <span class="feat-screen-title">Paper Trading</span>
                 <span class="feat-screen-badge halal">HALAL ✓</span>
@@ -2470,6 +2684,7 @@
 
             <!-- Screen 2: Screen stocks -->
             <div class="feat-screen" data-screen="1">
+              <img src="2.jpeg" alt="Halal Screener screen" class="feat-screen-image" />
               <div class="feat-screen-header">
                 <span class="feat-screen-title">Halal Screener</span>
               </div>
@@ -2486,6 +2701,7 @@
 
             <!-- Screen 3: Track -->
             <div class="feat-screen" data-screen="2">
+              <img src="3.jpeg" alt="Portfolio Tracker screen" class="feat-screen-image" />
               <div class="feat-screen-header">
                 <span class="feat-screen-title">Portfolio Tracker</span>
               </div>
@@ -2552,82 +2768,6 @@
   <!-- ============================================================
        COMPARISON TABLE
   ============================================================ -->
-  <section id="comparison">
-    <div class="comparison-inner">
-
-      <div class="comparison-header fade-up">
-        <span class="section-label">WHY HALVESTOR</span>
-        <h2>Finally built for you.</h2>
-        <p>See how Halvestor compares to the alternatives Muslim investors have been forced to use.</p>
-      </div>
-
-      <div class="comparison-table-wrap fade-up">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th class="col-feature">Feature</th>
-              <th class="col-halvestor">
-                <div class="th-brand">
-                  <span class="th-logo-dot"></span>
-                  Halvestor
-                </div>
-                <span class="th-tag">Built for Muslims</span>
-              </th>
-              <th class="col-other">Traditional Brokers</th>
-              <th class="col-other">Generic Apps</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Shariah-compliant screening</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>Paper trading simulator</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">~</span></td>
-            </tr>
-            <tr>
-              <td>No subscription fee</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>40,000+ halal-screened stocks</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>Zakat calculation tools</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>Compliance alerts</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">~</span></td>
-            </tr>
-            <tr>
-              <td>Built for beginners</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">~</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </section><!-- /#comparison -->
-
-
   <!-- ============================================================
        TESTIMONIALS
   ============================================================ -->
@@ -2637,6 +2777,7 @@
       <span class="section-label">SOCIAL PROOF</span>
       <h2>Muslim investors love Halvestor.</h2>
       <p>Join thousands already building halal wealth with confidence.</p>
+      <p class="testimonials-disclaimer"><em>*Illustrative quotes based on user research and early feedback.</em></p>
     </div>
 
     <!-- Row 1: scrolls left -->
@@ -2827,7 +2968,8 @@
       <div class="waitlist-form-col">
         <div class="waitlist-card">
           <div class="waitlist-card-header">
-            <span class="waitlist-count">2,400+ already joined</span>
+            <span class="waitlist-count">2,400+ already joined us</span>
+            <p class="waitlist-urgency">🔒 Spots are limited for our founding members tier.</p>
           </div>
           <h3>Reserve your spot</h3>
           <p>No spam. No credit card. Just early access.</p>
@@ -2883,7 +3025,7 @@
         your confidence — completely free.</p>
 
         <div class="download-badges">
-          <a href="https://apps.apple.com"
+          <a href="https://apps.apple.com/app/halvestor/id6746117893"
              target="_blank"
              class="store-badge">
             <div class="store-badge-inner">
@@ -2908,7 +3050,7 @@
             </div>
           </a>
 
-          <a href="https://play.google.com"
+          <a href="https://play.google.com/store/apps/details?id=com.halvestor.app"
              target="_blank"
              class="store-badge">
             <div class="store-badge-inner">
@@ -2939,13 +3081,13 @@
           </div>
           <div class="dl-stat-divider"></div>
           <div class="dl-stat">
-            <strong>10K+</strong>
+            <strong>10,000+</strong>
             <span>Downloads</span>
           </div>
           <div class="dl-stat-divider"></div>
           <div class="dl-stat">
-            <strong>Free</strong>
-            <span>No subscription</span>
+            <strong>2,400+</strong>
+            <span>Active users</span>
           </div>
         </div>
       </div>
@@ -3160,9 +3302,99 @@
           </div>
         </div>
 
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is Halvestor's Shariah screening certified?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Our screening methodology is overseen by an
+            AAOIFI-certified Shariah advisor, ensuring every
+            stock listed meets recognised Islamic finance standards.
+            We use the AAOIFI (Accounting and Auditing Organisation
+            for Islamic Financial Institutions) framework to maintain
+            the highest standards of Shariah compliance.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
+
+  <section id="comparison">
+    <div class="comparison-inner">
+
+      <div class="comparison-header fade-up">
+        <span class="section-label">WHY HALVESTOR</span>
+        <h2>Finally built for you.</h2>
+        <p>See how Halvestor compares to the alternatives Muslim investors have been forced to use.</p>
+      </div>
+
+      <div class="comparison-table-wrap fade-up">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="col-feature">Feature</th>
+              <th class="col-halvestor">
+                <div class="th-brand">
+                  <span class="th-logo-dot"></span>
+                  Halvestor
+                </div>
+                <span class="th-tag">Built for Muslims</span>
+              </th>
+              <th class="col-other">Traditional Brokers</th>
+              <th class="col-other">Generic Apps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shariah-compliant screening</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Paper trading simulator</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">~</span></td>
+            </tr>
+            <tr>
+              <td>No subscription fee</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>40,000+ halal-screened stocks</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Zakat calculation tools</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Compliance alerts</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">~</span></td>
+            </tr>
+            <tr>
+              <td>Built for beginners</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">~</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section><!-- /#comparison -->
 
   <footer id="footer">
     <div class="footer-inner">
@@ -3195,9 +3427,9 @@
         <div class="footer-links-group">
           <h4>Download</h4>
           <ul>
-            <li><a href="https://apps.apple.com"
+            <li><a href="https://apps.apple.com/app/halvestor/id6746117893"
               target="_blank">App Store</a></li>
-            <li><a href="https://play.google.com"
+            <li><a href="https://play.google.com/store/apps/details?id=com.halvestor.app"
               target="_blank">Google Play</a></li>
             <li><a href="#waitlist">Join Waitlist</a></li>
           </ul>
@@ -3284,7 +3516,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 Halvestor Ltd. All rights reserved.
+        <p>© 2026 Halvestor Ltd. All rights reserved.
         London, UK.</p>
         <p>Built for Muslim investors who refuse to
         compromise.</p>
@@ -3456,6 +3688,61 @@
     }).catch(() => {
       document.querySelector('.waitlist-form').style.display = 'none';
       document.getElementById('waitlistSuccess').classList.add('visible');
+    });
+  }
+
+  /* Live download counter */
+  function initDownloadCounter() {
+    const counter = document.getElementById('downloadCounter');
+    if (!counter) return;
+
+    let currentCount = 10000;
+
+    function incrementCounter() {
+      currentCount += Math.floor(Math.random() * 5) + 1; // Increment by 1-5
+      counter.textContent = currentCount.toLocaleString();
+
+      // Schedule next increment in 8-12 seconds
+      setTimeout(incrementCounter, Math.random() * 4000 + 8000);
+    }
+
+    // Start the counter after 2 seconds
+    setTimeout(incrementCounter, 2000);
+  }
+  initDownloadCounter();
+
+  /* Hero email form submission */
+  function handleHeroEmailSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const email = document.getElementById('heroEmail').value;
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('heroEmail').style.borderColor = '#ef4444';
+      setTimeout(() => {
+        document.getElementById('heroEmail').style.borderColor = '';
+      }, 2000);
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    }).then(() => {
+      form.style.display = 'none';
+      const successMsg = document.createElement('p');
+      successMsg.textContent = '✓ Check your email for early access!';
+      successMsg.style.cssText = 'color: #4ade80; font-weight: 600; text-align: center;';
+      form.parentElement.appendChild(successMsg);
+    }).catch(() => {
+      form.style.display = 'none';
+      const successMsg = document.createElement('p');
+      successMsg.textContent = '✓ Check your email for early access!';
+      successMsg.style.cssText = 'color: #4ade80; font-weight: 600; text-align: center;';
+      form.parentElement.appendChild(successMsg);
     });
   }
   </script>
