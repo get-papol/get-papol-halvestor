@@ -11,6 +11,11 @@
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#E1DFDB">
   <link rel="canonical" href="https://halvestor.com">
+  <meta name="keywords" content="halal investing, shariah compliant stocks, Muslim investor app, Islamic finance, halal stocks screener, paper trading">
+  <meta property="og:image" content="main1.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Halvestor — Halal Investing Made Simple">
+  <meta name="twitter:description" content="The first Shariah-compliant stock simulator for Muslim investors. Free on iOS & Android.">
 
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,6 +89,10 @@
     ul   { list-style: none; }
     button { cursor: pointer; border: none; outline: none; background: none; font-family: var(--font); }
 
+    /* Smooth scroll offset for fixed navbar (68px tall + buffer) */
+    section[id] {
+      scroll-margin-top: 90px;
+    }
 
     /* ============================================================
        LAYOUT UTILITY
@@ -126,6 +135,7 @@
     .stagger-5 { transition-delay: 0.60s; }
     .stagger-6 { transition-delay: 0.75s; }
     .stagger-7 { transition-delay: 0.90s; }
+    .stagger-8 { transition-delay: 1.05s; }
 
 
     /* ============================================================
@@ -525,6 +535,54 @@
       color: var(--text-primary);
     }
 
+    /* Social proof stat pills */
+    .hero-stats-pills {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      white-space: nowrap;
+    }
+
+    .stat-pill-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-pill-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* Mobile: allow graceful wrapping */
+    @media (max-width: 480px) {
+      .hero-stats-pills {
+        gap: 8px;
+      }
+      .stat-pill {
+        padding: 6px 12px;
+      }
+      .stat-pill-value {
+        font-size: 13px;
+      }
+      .stat-pill-label {
+        font-size: 11px;
+      }
+    }
 
     /* ---- Hero Right: Phone Mockup ---- */
     .hero-visual {
@@ -994,6 +1052,82 @@
       font-size: 18px;
       color: var(--text-secondary);
       line-height: 1.6;
+    }
+
+    /* 3-step flow visualization */
+    .features-steps-flow {
+      max-width: 900px;
+      margin: 48px auto 80px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .step-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      flex: 1;
+      max-width: 260px;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #000;
+      font-size: 20px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-label {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 4px 0;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .step-arrow {
+      font-size: 28px;
+      color: var(--accent);
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    /* Mobile: stack vertically, hide arrows */
+    @media (max-width: 768px) {
+      .features-steps-flow {
+        flex-direction: column;
+        gap: 16px;
+        margin: 40px auto 60px auto;
+      }
+      .step-card {
+        max-width: 100%;
+      }
+      .step-arrow {
+        display: none;
+      }
     }
 
     .features-sticky-wrap {
@@ -2518,6 +2652,22 @@
           <span class="download-count" id="downloadCounter">10,000</span> downloads and counting
         </p>
 
+        <!-- Social proof stat pills -->
+        <div class="hero-stats-pills fade-up stagger-8">
+          <div class="stat-pill">
+            <span class="stat-pill-value">10K+</span>
+            <span class="stat-pill-label">Downloads</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill-value">2,400+</span>
+            <span class="stat-pill-label">Users</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill-value">4.8★</span>
+            <span class="stat-pill-label">Rated</span>
+          </div>
+        </div>
+
         <!-- Trust line -->
         <p class="hero-trust fade-up stagger-7">
           Available on iOS &amp; Android<span class="dot">·</span>Free to Download
@@ -2642,6 +2792,37 @@
       </div>
       <h2>Everything you need.<br>Nothing you don't.</h2>
       <p>Built specifically for Muslim investors who refuse to compromise their values.</p>
+    </div>
+
+    <!-- 3-step flow -->
+    <div class="features-steps-flow fade-up">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4 class="step-label">Screen</h4>
+          <p class="step-desc">Find halal stocks instantly</p>
+        </div>
+      </div>
+
+      <div class="step-arrow" aria-hidden="true">→</div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4 class="step-label">Practice</h4>
+          <p class="step-desc">Trade with virtual money</p>
+        </div>
+      </div>
+
+      <div class="step-arrow" aria-hidden="true">→</div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4 class="step-label">Invest</h4>
+          <p class="step-desc">Build real halal wealth</p>
+        </div>
+      </div>
     </div>
 
     <!-- Sticky scroll container -->
@@ -3314,6 +3495,16 @@
             We use the AAOIFI (Accounting and Auditing Organisation
             for Islamic Financial Institutions) framework to maintain
             the highest standards of Shariah compliance.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What devices is Halvestor available on?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Halvestor is available as a free download on both iOS (App Store) and Android (Google Play). The paper trading simulator works on all modern smartphones.</p>
           </div>
         </div>
 
