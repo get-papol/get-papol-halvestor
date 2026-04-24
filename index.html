@@ -147,7 +147,7 @@
       align-items: center;
       gap: 8px;
       background-color: var(--accent);
-      color: #000;
+      color: #ffffff;
       font-size: 15px;
       font-weight: 700;
       padding: 15px 32px;
@@ -273,7 +273,7 @@
     .btn-cta-nav {
       display: inline-block;
       background-color: var(--accent);
-      color: #000;
+      color: #ffffff;
       font-size: 14px;
       font-weight: 700;
       padding: 10px 22px;
@@ -373,6 +373,38 @@
       background-size: 80px 80px;
       pointer-events: none;
       z-index: 0;
+    }
+
+    /* Global grid texture on all ash-background sections */
+    #features,
+    #social-videos,
+    #download,
+    #testimonials {
+      position: relative;
+    }
+
+    #features::before,
+    #social-videos::before,
+    #download::before,
+    #testimonials::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(18, 16, 15, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 16, 15, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ensure content sits above grid texture */
+    #features > *,
+    #social-videos > *,
+    #download .download-inner,
+    #testimonials > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-container {
@@ -1028,18 +1060,6 @@
       text-align: center;
       max-width: 700px;
       margin: 0 auto 80px auto;
-    }
-
-    .features-highlight-label {
-      display: inline-block;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      background: rgba(59, 132, 246, 0.12);
-      color: var(--accent);
-      padding: 8px 16px;
-      border-radius: 100px;
-      margin-bottom: 20px;
     }
 
     .features-header h2 {
@@ -3032,12 +3052,8 @@
 
     <!-- Section header -->
     <div class="features-header fade-up">
-      <span class="section-label">THE APP</span>
-      <div class="features-highlight-label">
-        We reduced halal investing from 7 steps to just 3
-      </div>
-      <h2>Everything you need.<br>Nothing you don't.</h2>
-      <p>Built specifically for Muslim investors who refuse to compromise their values.</p>
+      <h2>We reduced halal investing<br>from <em style="color: var(--accent); font-style: italic;">7 steps</em> to just <em style="color: var(--accent); font-style: italic;">3.</em></h2>
+      <p>No more hours of manual research. No more second-guessing. Everything you need to invest with confidence — built specifically for Muslim investors who refuse to compromise.</p>
     </div>
 
     <!-- 3-step flow -->
