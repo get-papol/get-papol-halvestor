@@ -1770,205 +1770,397 @@
   }
 
 
-  /* ============ WAITLIST ============ */
+  /* ============ WAITLIST MODAL ============ */
 
-  #waitlist {
-    padding: 120px 24px;
-    background: var(--bg-secondary);
+  body.modal-open {
+    overflow: hidden;
+    scroll-behavior: auto;
   }
 
-  .waitlist-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    gap: 80px;
-    align-items: center;
+  html:has(body.modal-open) {
+    scroll-behavior: auto;
   }
 
-  .waitlist-text {
-    flex: 1;
-  }
-
-  .waitlist-text h2 {
-    font-size: clamp(36px, 5vw, 52px);
-    font-weight: 800;
-    color: var(--text-primary);
-    line-height: 1.1;
-    margin: 16px 0 20px;
-  }
-
-  .waitlist-text p {
-    font-size: 17px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 32px;
-  }
-
-  .waitlist-perks {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .waitlist-perks li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  .perk-icon {
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .waitlist-form-col {
-    flex: 0 0 420px;
-  }
-
-  /* Waitlist phone mockup */
-  .waitlist-phone-col {
-    flex: 0 0 200px;
-    display: flex;
+  .waitlist-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
     align-items: center;
     justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-behavior: auto;
   }
 
-  .waitlist-phone-frame {
-    width: 180px;
-    background: #1a1a1a;
-    border-radius: 32px;
-    padding: 10px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.07);
-    transform: rotate(-4deg);
-    transition: transform 0.3s ease;
+  .waitlist-modal.is-open {
+    display: flex;
+    animation: wlFadeIn 0.25s ease forwards;
   }
 
-  .waitlist-phone-frame:hover {
-    transform: rotate(0deg) scale(1.03);
+  @keyframes wlFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  .waitlist-phone-img {
+  .waitlist-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 16, 15, 0.55);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .waitlist-modal-card {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    aspect-ratio: 9/19.5;
-    object-fit: cover;
-    object-position: top;
+    max-width: 460px;
+    background: #ffffff;
     border-radius: 24px;
-    display: block;
+    padding: 28px 32px 28px;
+    box-shadow: 0 30px 80px rgba(18, 16, 15, 0.35), 0 0 0 1px rgba(18, 16, 15, 0.04);
+    opacity: 0;
+    transform: translateY(8px);
+    animation: wlCardIn 0.28s ease-out 0.04s forwards;
+    max-height: calc(100vh - 48px);
+    overflow: visible;
+    scroll-behavior: auto;
   }
 
-  @media (max-width: 768px) {
-    .waitlist-phone-col {
-      display: none;
+  @keyframes wlCardIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  .waitlist-card {
-    background: #ffffff;
-    border-radius: 24px;
-    padding: 40px;
-    border: 1px solid rgba(18,16,15,0.08);
-    box-shadow: 0 8px 40px rgba(18,16,15,0.08);
+  .waitlist-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
-  .waitlist-card-header {
-    margin-bottom: 16px;
-  }
-
-  .waitlist-count {
-    display: inline-block;
-    background: rgba(59,132,246,0.1);
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 20px;
-    letter-spacing: 0.5px;
-  }
-
-  .waitlist-urgency {
-    font-size: 12px;
-    color: rgba(18, 16, 15, 0.6);
-    margin-top: 8px;
-    margin-bottom: 0;
-  }
-
-  .waitlist-card h3 {
-    font-size: 26px;
-    font-weight: 800;
+  .waitlist-modal-close:hover {
+    background: rgba(18, 16, 15, 0.06);
     color: var(--text-primary);
+  }
+
+  /* Progress bar */
+  .waitlist-modal-progress {
+    margin-bottom: 20px;
+  }
+
+  .waitlist-modal-step-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
     margin-bottom: 8px;
   }
 
-  .waitlist-card > p {
+  .waitlist-modal-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(18, 16, 15, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .waitlist-modal-bar-fill {
+    display: block;
+    height: 100%;
+    width: 33%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Phone mockup inside modal */
+  .waitlist-modal-phone {
+    width: 92px;
+    margin: 0 auto 14px;
+    background: #1a1a1a;
+    border-radius: 18px;
+    padding: 5px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    animation: wlPhoneFloat 4s ease-in-out 0.4s infinite;
+    transform: rotate(-5deg) translateZ(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .waitlist-modal-phone:hover {
+    animation: none;
+    transform: rotate(0deg) scale(1.05) translateZ(0);
+  }
+
+  .waitlist-modal-phone img {
+    width: 100%;
+    aspect-ratio: 9 / 19.5;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 16px;
+    display: block;
+  }
+
+  @keyframes wlPhoneFloat {
+    0%, 100% {
+      transform: rotate(-5deg) translateY(0) translateZ(0);
+    }
+    50% {
+      transform: rotate(-2deg) translateY(-6px) translateZ(0);
+    }
+  }
+
+  /* Steps */
+  .waitlist-step {
+    display: none;
+    min-height: 200px;
+    contain: layout paint;
+    isolation: isolate;
+    transform: translateZ(0);
+  }
+
+  .waitlist-modal[data-step="1"] .waitlist-step[data-step="1"],
+  .waitlist-modal[data-step="2"] .waitlist-step[data-step="2"],
+  .waitlist-modal[data-step="3"] .waitlist-step[data-step="3"],
+  .waitlist-modal[data-step="done"] .waitlist-step[data-step="done"] {
+    display: block;
+  }
+
+  .waitlist-step h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .waitlist-step > p {
     font-size: 14px;
     color: var(--text-secondary);
-    margin-bottom: 24px;
+    margin: 0 0 18px;
+    line-height: 1.5;
   }
 
-  .waitlist-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .waitlist-input {
+  .waitlist-step input[type="email"],
+  .waitlist-step input[type="text"] {
     width: 100%;
     padding: 14px 18px;
-    border: 1.5px solid rgba(18,16,15,0.15);
+    border: 1.5px solid rgba(18, 16, 15, 0.15);
     border-radius: 12px;
     font-size: 15px;
     font-family: inherit;
     background: var(--bg-primary);
     color: var(--text-primary);
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: border-color 0.18s ease;
     box-sizing: border-box;
+    margin-bottom: 14px;
+    scroll-margin: 0;
+    transform: translateZ(0);
   }
 
-  .waitlist-input:focus {
+  .waitlist-step input[type="email"]:focus,
+  .waitlist-step input[type="text"]:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(59,132,246,0.12);
+    box-shadow: 0 0 0 3px rgba(59, 132, 246, 0.12);
   }
 
-  .waitlist-input::placeholder {
-    color: rgba(18,16,15,0.35);
+  .waitlist-step input.invalid {
+    border-color: #ef4444;
+    animation: wlShake 0.35s ease;
   }
 
-  .waitlist-btn {
+  @keyframes wlShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+  }
+
+  .wl-next,
+  .wl-submit,
+  .wl-done-btn {
     width: 100%;
     padding: 15px;
     font-size: 15px;
     justify-content: center;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
   }
 
-  .waitlist-success {
-    display: none;
-    background: rgba(34,197,94,0.1);
-    color: #16a34a;
-    border: 1px solid rgba(34,197,94,0.2);
-    border-radius: 10px;
+  .wl-step-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .wl-step-actions .wl-next,
+  .wl-step-actions .wl-submit {
+    flex: 2;
+    width: auto;
+  }
+
+  .wl-back {
+    flex: 1;
+    padding: 15px;
+    font-size: 15px;
+    background: transparent;
+    border: 1.5px solid rgba(18, 16, 15, 0.15);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .wl-back:hover {
+    background: rgba(18, 16, 15, 0.04);
+    border-color: rgba(18, 16, 15, 0.25);
+  }
+
+  /* Location pills */
+  .wl-location-q {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .wl-location-pills {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .wl-pill {
+    flex: 1;
     padding: 12px 16px;
+    border: 1.5px solid rgba(18, 16, 15, 0.15);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-primary);
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .wl-pill:hover {
+    border-color: rgba(18, 16, 15, 0.3);
+  }
+
+  .wl-pill.selected {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 132, 246, 0.3);
+  }
+
+  .wl-location-pills.invalid .wl-pill {
+    border-color: #ef4444;
+    animation: wlShake 0.35s ease;
+  }
+
+  /* Privacy checkbox */
+  .wl-privacy {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid rgba(18, 16, 15, 0.1);
+    border-radius: 10px;
+    background: var(--bg-primary);
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    margin-bottom: 18px;
+    line-height: 1.4;
+    transition: border-color 0.2s ease;
+  }
+
+  .wl-privacy input[type="checkbox"] {
+    margin: 2px 0 0 0;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .wl-privacy a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .wl-privacy.invalid {
+    border-color: #ef4444;
+    animation: wlShake 0.35s ease;
+  }
+
+  /* Success state */
+  .waitlist-step[data-step="done"] {
     text-align: center;
   }
 
-  .waitlist-success.visible {
-    display: block;
+  .wl-success-check {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.12);
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    animation: wlPop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .waitlist-fine {
-    font-size: 11px;
-    color: rgba(18,16,15,0.35);
-    text-align: center;
-    line-height: 1.5;
-    margin: 0;
+  @keyframes wlPop {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .waitlist-modal-card {
+      padding: 32px 22px 24px;
+      border-radius: 20px;
+    }
+    .waitlist-modal-phone {
+      width: 90px;
+    }
+    .waitlist-step h3 {
+      font-size: 22px;
+    }
   }
 
   /* ============ DOWNLOAD ============ */
@@ -2215,14 +2407,9 @@
   }
 
   @media (max-width: 768px) {
-    .waitlist-inner,
     .download-inner {
       flex-direction: column;
       gap: 48px;
-    }
-    .waitlist-form-col {
-      flex: none;
-      width: 100%;
     }
     .download-phone-col {
       flex: none;
@@ -3464,88 +3651,6 @@
 
   </section><!-- /#testimonials -->
 
-  <section id="waitlist">
-    <div class="waitlist-inner fade-up">
-
-      <div class="waitlist-text">
-        <span class="section-label">EARLY ACCESS</span>
-        <h2>Be first when we launch.</h2>
-        <p>The full Halvestor trading platform is coming soon.
-        Join the waitlist and get early access, exclusive
-        perks, and zero subscription fees for life.</p>
-        <ul class="waitlist-perks">
-          <li>
-            <span class="perk-icon">🎯</span>
-            <span>Priority access before public launch</span>
-          </li>
-          <li>
-            <span class="perk-icon">💰</span>
-            <span>Free subscription — forever</span>
-          </li>
-          <li>
-            <span class="perk-icon">📣</span>
-            <span>Shape the product with direct feedback</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Waitlist phone mockup -->
-      <div class="waitlist-phone-col">
-        <div class="waitlist-phone-frame">
-          <img src="3.jpeg" alt="Halvestor app" class="waitlist-phone-img" />
-        </div>
-      </div>
-
-      <div class="waitlist-form-col">
-        <div class="waitlist-card">
-          <div class="waitlist-card-header">
-            <span class="waitlist-count">2,400+ already joined us</span>
-            <p class="waitlist-urgency">🔒 Spots are limited for our founding members tier.</p>
-          </div>
-          <h3>Reserve your spot</h3>
-          <p>No spam. No credit card. Just early access.</p>
-          <form
-            action="https://app.us9.list-manage.com/subscribe/post?u=66648363874f53864e876d475&amp;id=b18d11845e&amp;f_id=0061c9e0f0"
-            method="post"
-            id="mc-embedded-subscribe-form"
-            name="mc-embedded-subscribe-form"
-            class="waitlist-form"
-            onsubmit="handleWaitlistSubmit(event)"
-          >
-            <input
-              type="email"
-              name="EMAIL"
-              id="waitlistEmail"
-              class="waitlist-input"
-              placeholder="your@email.com"
-              required
-            />
-            <div aria-hidden="true" style="position:absolute;left:-5000px;">
-              <input
-                type="text"
-                name="b_66648363874f53864e876d475_b18d11845e"
-                aria-hidden="true"
-                tabindex="-1"
-                value=""
-              />
-            </div>
-            <button type="submit" class="btn-primary waitlist-btn">
-              Join the Waitlist
-            </button>
-          </form>
-          <div class="waitlist-success" id="waitlistSuccess">
-            ✓ You're on the list! We'll be in touch soon.
-          </div>
-          <p class="waitlist-fine">
-            By joining you agree to receive updates from
-            Halvestor. Unsubscribe anytime.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <section id="download">
     <div class="download-inner fade-up">
 
@@ -4019,6 +4124,92 @@
   </footer>
 
   <!-- ============================================================
+       WAITLIST MODAL
+  ============================================================ -->
+  <div
+    id="waitlistModal"
+    class="waitlist-modal"
+    data-step="1"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="waitlistModalTitle"
+  >
+    <div class="waitlist-modal-backdrop" data-close-modal></div>
+    <div class="waitlist-modal-card">
+      <button type="button" class="waitlist-modal-close" aria-label="Close" data-close-modal>&times;</button>
+
+      <div class="waitlist-modal-progress">
+        <span class="waitlist-modal-step-label">STEP <span id="wlStepNum">1</span> OF 3</span>
+        <div class="waitlist-modal-bar"><span class="waitlist-modal-bar-fill"></span></div>
+      </div>
+
+      <div class="waitlist-modal-phone">
+        <img src="3.jpeg" alt="" />
+      </div>
+
+      <!-- Step 1: Email -->
+      <div class="waitlist-step" data-step="1">
+        <h3 id="waitlistModalTitle">What's your email?</h3>
+        <p>We'll let you know the moment the waitlist opens. No spam.</p>
+        <input type="email" id="wlEmail" placeholder="your@email.com" autocomplete="email" required />
+        <button type="button" class="btn-primary wl-next" data-next-from="1">Continue &rarr;</button>
+      </div>
+
+      <!-- Step 2: Name (optional) -->
+      <div class="waitlist-step" data-step="2">
+        <h3>And what should we call you?</h3>
+        <p>Optional &mdash; leave blank if you prefer.</p>
+        <input type="text" id="wlName" placeholder="Your name (optional)" autocomplete="given-name" />
+        <div class="wl-step-actions">
+          <button type="button" class="wl-back">&larr; Back</button>
+          <button type="button" class="btn-primary wl-next" data-next-from="2">Continue &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Location + privacy + submit -->
+      <div class="waitlist-step" data-step="3">
+        <h3>Last step.</h3>
+        <p>Tell us where you're based and agree to our terms.</p>
+        <span class="wl-location-q">You're in the UK, right?</span>
+        <div class="wl-location-pills">
+          <button type="button" class="wl-pill" data-loc="UK">Yes</button>
+          <button type="button" class="wl-pill" data-loc="OTHER">Elsewhere</button>
+        </div>
+        <label class="wl-privacy">
+          <input type="checkbox" id="wlPrivacy" />
+          <span>I agree to the <a href="#" onclick="event.preventDefault()">privacy policy</a></span>
+        </label>
+        <div class="wl-step-actions">
+          <button type="button" class="wl-back">&larr; Back</button>
+          <button type="button" class="btn-primary wl-submit">Secure my spot &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="waitlist-step" data-step="done">
+        <div class="wl-success-check">&check;</div>
+        <h3>You're on the list.</h3>
+        <p>Thanks for joining. We'll be in touch the moment Halvestor opens.</p>
+        <button type="button" class="btn-primary wl-done-btn" data-close-modal>Done</button>
+      </div>
+
+      <!-- Hidden Mailchimp form (email-only submission) -->
+      <form
+        id="mc-embedded-subscribe-form"
+        action="https://app.us9.list-manage.com/subscribe/post?u=66648363874f53864e876d475&amp;id=b18d11845e&amp;f_id=0061c9e0f0"
+        method="post"
+        style="display:none"
+      >
+        <input type="email" name="EMAIL" id="mcEmail" />
+        <div aria-hidden="true" style="position:absolute;left:-5000px;">
+          <input type="text" name="b_66648363874f53864e876d475_b18d11845e" tabindex="-1" value="" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
        JAVASCRIPT
   ============================================================ -->
   <script>
@@ -4157,31 +4348,181 @@
     }
   }
 
-  function handleWaitlistSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById('waitlistEmail').value;
-    if (!email || !email.includes('@')) {
-      document.getElementById('waitlistEmail').style.borderColor = '#ef4444';
+  /* Waitlist modal */
+  function initWaitlistModal() {
+    const modal = document.getElementById('waitlistModal');
+    if (!modal) return;
+
+    const stepNumEl = document.getElementById('wlStepNum');
+    const barFill = modal.querySelector('.waitlist-modal-bar-fill');
+    const emailInput = document.getElementById('wlEmail');
+    const nameInput = document.getElementById('wlName');
+    const privacyCheckbox = document.getElementById('wlPrivacy');
+    const privacyLabel = modal.querySelector('.wl-privacy');
+    const pillsContainer = modal.querySelector('.wl-location-pills');
+    let selectedLocation = null;
+
+    function openModal() {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      goToStep(1);
       setTimeout(() => {
-        document.getElementById('waitlistEmail').style.borderColor = '';
-      }, 2000);
-      return;
+        if (emailInput) {
+          try { emailInput.focus({ preventScroll: true }); }
+          catch (_) { emailInput.focus(); }
+        }
+      }, 150);
     }
 
-    const form = document.getElementById('mc-embedded-subscribe-form');
-    const formData = new FormData(form);
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      setTimeout(resetModal, 300);
+    }
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      mode: 'no-cors'
-    }).then(() => {
-      document.querySelector('.waitlist-form').style.display = 'none';
-      document.getElementById('waitlistSuccess').classList.add('visible');
-    }).catch(() => {
-      document.querySelector('.waitlist-form').style.display = 'none';
-      document.getElementById('waitlistSuccess').classList.add('visible');
+    function resetModal() {
+      goToStep(1);
+      if (emailInput) emailInput.value = '';
+      if (nameInput) nameInput.value = '';
+      if (privacyCheckbox) privacyCheckbox.checked = false;
+      modal.querySelectorAll('.wl-pill').forEach(p => p.classList.remove('selected'));
+      selectedLocation = null;
+    }
+
+    function goToStep(n) {
+      modal.dataset.step = n;
+      if (typeof n === 'number') {
+        if (stepNumEl) stepNumEl.textContent = n;
+        if (barFill) barFill.style.width = (n / 3 * 100) + '%';
+      } else if (n === 'done') {
+        if (barFill) barFill.style.width = '100%';
+      }
+    }
+
+    function markInvalid(el) {
+      el.classList.add('invalid');
+      setTimeout(() => el.classList.remove('invalid'), 600);
+    }
+
+    // Open via any #waitlist anchor — capture phase + stopPropagation
+    // beats the per-anchor smooth-scroll listener.
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('a[href="#waitlist"]');
+      if (!trigger) return;
+      e.preventDefault();
+      e.stopPropagation();
+      // Close mobile nav if open
+      if (typeof closeMobileNav === 'function') closeMobileNav();
+      openModal();
+    }, true);
+
+    // Close handlers
+    modal.addEventListener('click', (e) => {
+      if (e.target.matches('[data-close-modal]')) closeModal();
     });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    // Next buttons — only buttons with data-next-from advance steps
+    modal.querySelectorAll('.wl-next').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const from = parseInt(btn.dataset.nextFrom, 10);
+        if (isNaN(from)) return;
+        if (from === 1) {
+          const email = emailInput.value.trim();
+          if (!email || !email.includes('@') || !email.includes('.')) {
+            markInvalid(emailInput);
+            try { emailInput.focus({ preventScroll: true }); }
+            catch (_) { emailInput.focus(); }
+            return;
+          }
+        }
+        goToStep(from + 1);
+      });
+    });
+
+    // Clear invalid state on input
+    if (emailInput) {
+      emailInput.addEventListener('input', () => emailInput.classList.remove('invalid'));
+    }
+
+    // Back buttons
+    modal.querySelectorAll('.wl-back').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const current = parseInt(modal.dataset.step, 10);
+        if (!isNaN(current) && current > 1) goToStep(current - 1);
+      });
+    });
+
+    // Enter key on inputs advances
+    if (emailInput) {
+      emailInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          modal.querySelector('.wl-next[data-next-from="1"]').click();
+        }
+      });
+    }
+    if (nameInput) {
+      nameInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          modal.querySelector('.wl-next[data-next-from="2"]').click();
+        }
+      });
+    }
+
+    // Location pills
+    modal.querySelectorAll('.wl-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        modal.querySelectorAll('.wl-pill').forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        selectedLocation = pill.dataset.loc;
+        pillsContainer.classList.remove('invalid');
+      });
+    });
+
+    // Final submit
+    const submitBtn = modal.querySelector('.wl-submit');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        let ok = true;
+        if (!selectedLocation) {
+          pillsContainer.classList.add('invalid');
+          setTimeout(() => pillsContainer.classList.remove('invalid'), 600);
+          ok = false;
+        }
+        if (!privacyCheckbox.checked) {
+          privacyLabel.classList.add('invalid');
+          setTimeout(() => privacyLabel.classList.remove('invalid'), 600);
+          ok = false;
+        }
+        if (!ok) return;
+
+        // Populate hidden Mailchimp form (email only)
+        document.getElementById('mcEmail').value = emailInput.value.trim();
+        const form = document.getElementById('mc-embedded-subscribe-form');
+        const formData = new FormData(form);
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting…';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        }).finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Secure my spot →';
+          goToStep('done');
+        });
+      });
+    }
   }
 
   /* Live download counter */
@@ -4203,6 +4544,7 @@
     setTimeout(incrementCounter, 2000);
   }
   initDownloadCounter();
+  initWaitlistModal();
 
   /* Hero email form submission */
   function handleHeroEmailSubmit(e) {
