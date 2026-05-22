@@ -1770,6 +1770,207 @@
   }
 
 
+  /* ============ WAITLIST (inline section) ============ */
+
+  #waitlist {
+    padding: 120px 24px;
+    background: var(--bg-secondary);
+  }
+
+  .waitlist-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .waitlist-text {
+    flex: 1;
+  }
+
+  .waitlist-text h2 {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin: 16px 0 20px;
+  }
+
+  .waitlist-text p {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .waitlist-perks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .waitlist-perks li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .perk-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .waitlist-form-col {
+    flex: 0 0 420px;
+  }
+
+  /* Waitlist phone mockup */
+  .waitlist-phone-col {
+    flex: 0 0 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .waitlist-phone-frame {
+    width: 180px;
+    background: #1a1a1a;
+    border-radius: 32px;
+    padding: 10px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.07);
+    transform: rotate(-4deg);
+    transition: transform 0.3s ease;
+  }
+
+  .waitlist-phone-frame:hover {
+    transform: rotate(0deg) scale(1.03);
+  }
+
+  .waitlist-phone-img {
+    width: 100%;
+    aspect-ratio: 9/19.5;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 24px;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .waitlist-phone-col {
+      display: none;
+    }
+  }
+
+  .waitlist-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid rgba(18,16,15,0.08);
+    box-shadow: 0 8px 40px rgba(18,16,15,0.08);
+  }
+
+  .waitlist-card-header {
+    margin-bottom: 16px;
+  }
+
+  .waitlist-count {
+    display: inline-block;
+    background: rgba(59,132,246,0.1);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .waitlist-urgency {
+    font-size: 12px;
+    color: rgba(18, 16, 15, 0.6);
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+
+  .waitlist-card h3 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .waitlist-card > p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .waitlist-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .waitlist-input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid rgba(18,16,15,0.15);
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .waitlist-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59,132,246,0.12);
+  }
+
+  .waitlist-input::placeholder {
+    color: rgba(18,16,15,0.35);
+  }
+
+  .waitlist-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 15px;
+    justify-content: center;
+  }
+
+  .waitlist-success {
+    display: none;
+    background: rgba(34,197,94,0.1);
+    color: #16a34a;
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .waitlist-success.visible {
+    display: block;
+  }
+
+  .waitlist-fine {
+    font-size: 11px;
+    color: rgba(18,16,15,0.35);
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+  }
+
   /* ============ WAITLIST MODAL ============ */
 
   body.modal-open {
@@ -2407,9 +2608,14 @@
   }
 
   @media (max-width: 768px) {
+    .waitlist-inner,
     .download-inner {
       flex-direction: column;
       gap: 48px;
+    }
+    .waitlist-form-col {
+      flex: none;
+      width: 100%;
     }
     .download-phone-col {
       flex: none;
@@ -3007,7 +3213,7 @@
         </ul>
 
         <!-- Desktop CTA + mobile hamburger -->
-        <a href="#waitlist" class="btn-cta-nav">Join Waitlist</a>
+        <a href="#waitlist" class="btn-cta-nav" data-open-waitlist-modal>Join Waitlist</a>
 
         <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
           <span></span>
@@ -3025,7 +3231,7 @@
     <a href="#features" onclick="closeMobileNav()">Features</a>
     <a href="#comparison" onclick="closeMobileNav()">Compare</a>
     <a href="#waitlist" onclick="closeMobileNav()">Waitlist</a>
-    <a href="#waitlist" class="btn-cta-nav" onclick="closeMobileNav()">Join Waitlist</a>
+    <a href="#waitlist" class="btn-cta-nav" data-open-waitlist-modal onclick="closeMobileNav()">Join Waitlist</a>
   </div>
 
 
@@ -3480,6 +3686,337 @@
        COMPARISON TABLE
   ============================================================ -->
   <!-- ============================================================
+       WAITLIST (inline)
+  ============================================================ -->
+  <section id="waitlist">
+    <div class="waitlist-inner fade-up">
+
+      <div class="waitlist-text">
+        <span class="section-label">EARLY ACCESS</span>
+        <h2>Be first when we launch.</h2>
+        <p>The full Halvestor trading platform is coming soon.
+        Join the waitlist and get early access, exclusive
+        perks, and zero subscription fees for life.</p>
+        <ul class="waitlist-perks">
+          <li>
+            <span class="perk-icon">🎯</span>
+            <span>Priority access before public launch</span>
+          </li>
+          <li>
+            <span class="perk-icon">💰</span>
+            <span>Free subscription — forever</span>
+          </li>
+          <li>
+            <span class="perk-icon">📣</span>
+            <span>Shape the product with direct feedback</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Waitlist phone mockup -->
+      <div class="waitlist-phone-col">
+        <div class="waitlist-phone-frame">
+          <img src="3.jpeg" alt="Halvestor app" class="waitlist-phone-img" />
+        </div>
+      </div>
+
+      <div class="waitlist-form-col">
+        <div class="waitlist-card">
+          <div class="waitlist-card-header">
+            <span class="waitlist-count">2,400+ already joined us</span>
+            <p class="waitlist-urgency">🔒 Spots are limited for our founding members tier.</p>
+          </div>
+          <h3>Reserve your spot</h3>
+          <p>No spam. No credit card. Just early access.</p>
+          <form
+            action="https://app.us9.list-manage.com/subscribe/post?u=66648363874f53864e876d475&amp;id=b18d11845e&amp;f_id=0061c9e0f0"
+            method="post"
+            id="mc-inline-subscribe-form"
+            name="mc-inline-subscribe-form"
+            class="waitlist-form"
+            onsubmit="handleInlineWaitlistSubmit(event)"
+          >
+            <input
+              type="email"
+              name="EMAIL"
+              id="waitlistEmail"
+              class="waitlist-input"
+              placeholder="your@email.com"
+              required
+            />
+            <div aria-hidden="true" style="position:absolute;left:-5000px;">
+              <input
+                type="text"
+                name="b_66648363874f53864e876d475_b18d11845e"
+                aria-hidden="true"
+                tabindex="-1"
+                value=""
+              />
+            </div>
+            <button type="submit" class="btn-primary waitlist-btn">
+              Join the Waitlist
+            </button>
+          </form>
+          <div class="waitlist-success" id="waitlistSuccess">
+            ✓ You're on the list! We'll be in touch soon.
+          </div>
+          <p class="waitlist-fine">
+            By joining you agree to receive updates from
+            Halvestor. Unsubscribe anytime.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="faq-inner">
+
+      <div class="faq-header fade-up">
+        <span class="section-label">FAQ</span>
+        <h2>Got questions?<br>We have answers.</h2>
+        <p>Everything you need to know about halal
+        investing with Halvestor.</p>
+      </div>
+
+      <div class="faq-list fade-up">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is Halvestor?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Halvestor is a Shariah-compliant investing app
+            built specifically for Muslim investors. We offer
+            a paper trading simulator so you can practice
+            investing with real market data using virtual
+            money, with every stock pre-screened for halal
+            compliance. A full trading platform is coming
+            soon.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How does Halvestor ensure Shariah
+            compliance?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>We use the AAOIFI (Accounting and Auditing
+            Organisation for Islamic Financial Institutions)
+            methodology to screen stocks. This means we
+            check debt ratios, interest income levels,
+            business activity, and purification requirements
+            across 40,000+ stocks, updated continuously.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is the app really free? What are
+            Halvestor's fees?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — the paper trading simulator is
+            completely free with no subscription fee.
+            Our survey found that 86% of Muslim investors
+            prefer anything other than a subscription model,
+            so we built accordingly. Waitlist members will
+            also receive free access to the full platform
+            when it launches.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is paper trading and why does
+            it matter?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Paper trading means practicing with virtual
+            money using real market prices. It lets you
+            learn how markets work, test strategies, and
+            build confidence without risking real capital.
+            For Muslim investors who are new to investing,
+            it is the perfect starting point.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I know if a stock becomes
+            non-halal after I buy it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Halvestor monitors your holdings continuously.
+            If a stock in your portfolio fails our Shariah
+            screening criteria — due to a change in the
+            company's business activities or financial
+            ratios — you will receive an immediate compliance
+            alert so you can take action.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is Zakat and how does Halvestor
+            help calculate it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Zakat is the annual Islamic obligation to
+            donate 2.5% of qualifying wealth to those in
+            need. Halvestor's built-in Zakat calculator
+            analyses your portfolio and calculates exactly
+            what you owe based on your holdings, so you
+            can fulfil this obligation accurately and
+            with confidence.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>When is the full trading platform
+            launching?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>We are actively building the full Halvestor
+            trading platform. Join the waitlist to be
+            first to know the launch date, get early
+            access before the public, and lock in free
+            subscription access for life. You can also
+            reach us at Prosper@halvestor.com for
+            any questions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is my data secure?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Halvestor uses bank-grade encryption
+            to protect all user data. The paper trading
+            simulator uses virtual money only — no real
+            financial information is required to get
+            started. We will never sell your data to
+            third parties.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is Halvestor's Shariah screening certified?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Our screening methodology is overseen by an
+            AAOIFI-certified Shariah advisor, ensuring every
+            stock listed meets recognised Islamic finance standards.
+            We use the AAOIFI (Accounting and Auditing Organisation
+            for Islamic Financial Institutions) framework to maintain
+            the highest standards of Shariah compliance.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What devices is Halvestor available on?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Halvestor is available as a free download on both iOS (App Store) and Android (Google Play). The paper trading simulator works on all modern smartphones.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="comparison">
+    <div class="comparison-inner">
+
+      <div class="comparison-header fade-up">
+        <span class="section-label">WHY HALVESTOR</span>
+        <h2>Finally built for you.</h2>
+        <p>See how Halvestor compares to the alternatives Muslim investors have been forced to use.</p>
+      </div>
+
+      <div class="comparison-table-wrap fade-up">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="col-feature">Feature</th>
+              <th class="col-halvestor">
+                <div class="th-brand">
+                  <span class="th-logo-dot"></span>
+                  Halvestor
+                </div>
+                <span class="th-tag">Built for Muslims</span>
+              </th>
+              <th class="col-other">Traditional Brokers</th>
+              <th class="col-other">Generic Apps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shariah-compliant screening</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Paper trading simulator</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">~</span></td>
+            </tr>
+            <tr>
+              <td>No subscription fee</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>40,000+ halal-screened stocks</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Zakat calculation tools</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td>Compliance alerts</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">~</span></td>
+            </tr>
+            <tr>
+              <td>Built for beginners</td>
+              <td class="col-halvestor"><span class="check">✓</span></td>
+              <td><span class="cross">✗</span></td>
+              <td><span class="partial">~</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section><!-- /#comparison -->
+
+  <!-- ============================================================
        TESTIMONIALS
   ============================================================ -->
   <section id="testimonials">
@@ -3742,252 +4279,6 @@
     </div>
   </section>
 
-  <section id="faq">
-    <div class="faq-inner">
-
-      <div class="faq-header fade-up">
-        <span class="section-label">FAQ</span>
-        <h2>Got questions?<br>We have answers.</h2>
-        <p>Everything you need to know about halal
-        investing with Halvestor.</p>
-      </div>
-
-      <div class="faq-list fade-up">
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>What is Halvestor?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Halvestor is a Shariah-compliant investing app
-            built specifically for Muslim investors. We offer
-            a paper trading simulator so you can practice
-            investing with real market data using virtual
-            money, with every stock pre-screened for halal
-            compliance. A full trading platform is coming
-            soon.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>How does Halvestor ensure Shariah
-            compliance?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>We use the AAOIFI (Accounting and Auditing
-            Organisation for Islamic Financial Institutions)
-            methodology to screen stocks. This means we
-            check debt ratios, interest income levels,
-            business activity, and purification requirements
-            across 40,000+ stocks, updated continuously.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Is the app really free? What are
-            Halvestor's fees?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Yes — the paper trading simulator is
-            completely free with no subscription fee.
-            Our survey found that 86% of Muslim investors
-            prefer anything other than a subscription model,
-            so we built accordingly. Waitlist members will
-            also receive free access to the full platform
-            when it launches.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>What is paper trading and why does
-            it matter?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Paper trading means practicing with virtual
-            money using real market prices. It lets you
-            learn how markets work, test strategies, and
-            build confidence without risking real capital.
-            For Muslim investors who are new to investing,
-            it is the perfect starting point.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>How do I know if a stock becomes
-            non-halal after I buy it?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Halvestor monitors your holdings continuously.
-            If a stock in your portfolio fails our Shariah
-            screening criteria — due to a change in the
-            company's business activities or financial
-            ratios — you will receive an immediate compliance
-            alert so you can take action.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>What is Zakat and how does Halvestor
-            help calculate it?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Zakat is the annual Islamic obligation to
-            donate 2.5% of qualifying wealth to those in
-            need. Halvestor's built-in Zakat calculator
-            analyses your portfolio and calculates exactly
-            what you owe based on your holdings, so you
-            can fulfil this obligation accurately and
-            with confidence.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>When is the full trading platform
-            launching?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>We are actively building the full Halvestor
-            trading platform. Join the waitlist to be
-            first to know the launch date, get early
-            access before the public, and lock in free
-            subscription access for life. You can also
-            reach us at Prosper@halvestor.com for
-            any questions.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Is my data secure?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Yes. Halvestor uses bank-grade encryption
-            to protect all user data. The paper trading
-            simulator uses virtual money only — no real
-            financial information is required to get
-            started. We will never sell your data to
-            third parties.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>Is Halvestor's Shariah screening certified?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Yes. Our screening methodology is overseen by an
-            AAOIFI-certified Shariah advisor, ensuring every
-            stock listed meets recognised Islamic finance standards.
-            We use the AAOIFI (Accounting and Auditing Organisation
-            for Islamic Financial Institutions) framework to maintain
-            the highest standards of Shariah compliance.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>What devices is Halvestor available on?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>Halvestor is available as a free download on both iOS (App Store) and Android (Google Play). The paper trading simulator works on all modern smartphones.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="comparison">
-    <div class="comparison-inner">
-
-      <div class="comparison-header fade-up">
-        <span class="section-label">WHY HALVESTOR</span>
-        <h2>Finally built for you.</h2>
-        <p>See how Halvestor compares to the alternatives Muslim investors have been forced to use.</p>
-      </div>
-
-      <div class="comparison-table-wrap fade-up">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th class="col-feature">Feature</th>
-              <th class="col-halvestor">
-                <div class="th-brand">
-                  <span class="th-logo-dot"></span>
-                  Halvestor
-                </div>
-                <span class="th-tag">Built for Muslims</span>
-              </th>
-              <th class="col-other">Traditional Brokers</th>
-              <th class="col-other">Generic Apps</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Shariah-compliant screening</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>Paper trading simulator</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">~</span></td>
-            </tr>
-            <tr>
-              <td>No subscription fee</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>40,000+ halal-screened stocks</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>Zakat calculation tools</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="cross">✗</span></td>
-            </tr>
-            <tr>
-              <td>Compliance alerts</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">~</span></td>
-            </tr>
-            <tr>
-              <td>Built for beginners</td>
-              <td class="col-halvestor"><span class="check">✓</span></td>
-              <td><span class="cross">✗</span></td>
-              <td><span class="partial">~</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </section><!-- /#comparison -->
-
   <footer id="footer">
     <div class="footer-inner">
 
@@ -3999,7 +4290,7 @@
             <li><a href="#features">Features</a></li>
             <li><a href="#comparison">Why Halvestor</a></li>
             <li><a href="#download">Download App</a></li>
-            <li><a href="#waitlist">Join Waitlist</a></li>
+            <li><a href="#waitlist" data-open-waitlist-modal>Join Waitlist</a></li>
           </ul>
         </div>
 
@@ -4027,7 +4318,7 @@
             <li><a href="https://play.google.com/store/apps/details?id=com.halvestor.app"
               target="_blank"
               rel="noopener noreferrer">Google Play</a></li>
-            <li><a href="#waitlist">Join Waitlist</a></li>
+            <li><a href="#waitlist" data-open-waitlist-modal>Join Waitlist</a></li>
           </ul>
         </div>
 
@@ -4409,7 +4700,7 @@
     // Open via any #waitlist anchor — capture phase + stopPropagation
     // beats the per-anchor smooth-scroll listener.
     document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('a[href="#waitlist"]');
+      const trigger = e.target.closest('[data-open-waitlist-modal]');
       if (!trigger) return;
       e.preventDefault();
       e.stopPropagation();
@@ -4545,6 +4836,30 @@
   }
   initDownloadCounter();
   initWaitlistModal();
+
+  /* Inline waitlist form (in #waitlist section) */
+  function handleInlineWaitlistSubmit(e) {
+    e.preventDefault();
+    const emailEl = document.getElementById('waitlistEmail');
+    const email = emailEl.value;
+    if (!email || !email.includes('@')) {
+      emailEl.style.borderColor = '#ef4444';
+      setTimeout(() => { emailEl.style.borderColor = ''; }, 2000);
+      return;
+    }
+
+    const form = document.getElementById('mc-inline-subscribe-form');
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    }).finally(() => {
+      form.style.display = 'none';
+      document.getElementById('waitlistSuccess').classList.add('visible');
+    });
+  }
 
   /* Hero email form submission */
   function handleHeroEmailSubmit(e) {
